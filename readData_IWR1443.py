@@ -281,7 +281,7 @@ def update():
     y = []
       
     # Read and parse the received data
-    dataOk, frameNumber, detObj = readAndParseData16xx(Dataport, configParameters)
+    dataOk, frameNumber, detObj = readAndParseData14xx(Dataport, configParameters)
     
     if dataOk:
         #print(detObj)
