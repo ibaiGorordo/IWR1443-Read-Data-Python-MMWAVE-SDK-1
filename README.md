@@ -1,4 +1,4 @@
-# IWR1443 Read Data (Python)
+# IWR1443 Read Data (Python 3)
 
 Python program to read and plot the data in real time from the **AWR1443** and **IWR1443** mmWave radar boards (Texas Instruments). The program has been tested with Windows and Raspberry Pi and is based on the Matlab demo from Texas Instruments.
 
