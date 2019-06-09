@@ -9,6 +9,8 @@ configFileName = '1443config.cfg'
 
 CLIport = {}
 Dataport = {}
+byteBuffer = np.zeros(2**15,dtype = 'uint8')
+byteBufferLength = 0;
 
 
 # ------------------------------------------------------------------
@@ -95,9 +97,7 @@ def parseConfigFile(configFileName):
 
 # Funtion to read and parse the incoming data
 def readAndParseData14xx(Dataport, configParameters):
-    #global byteBuffer, byteBufferLength
-    byteBuffer = np.zeros(2**15,dtype = 'uint8')
-    byteBufferLength = 0;
+    global byteBuffer, byteBufferLength
     
     # Constants
     OBJ_STRUCT_SIZE_BYTES = 12;
@@ -126,12 +126,12 @@ def readAndParseData14xx(Dataport, configParameters):
     if byteBufferLength > 16:
         
         # Check for all possible locations of the magic word
-        possibleLocs = np.where(byteVec == magicWord[0])[0]
+        possibleLocs = np.where(byteBuffer == magicWord[0])[0]
 
         # Confirm that is the beginning of the magic word and store the index in startIdx
         startIdx = []
         for loc in possibleLocs:
-            check = byteVec[loc:loc+8]
+            check = byteBuffer[loc:loc+8]
             if np.all(check == magicWord):
                 startIdx.append(loc)
                
