@@ -183,6 +183,10 @@ def readAndParseData14xx(Dataport, configParameters):
         numTLVs = np.matmul(byteBuffer[idX:idX+4],word)
         idX += 4
         
+        # UNCOMMENT IN CASE OF SDK 2 or above
+        #subFrameNumber = np.matmul(byteBuffer[idX:idX+4],word)
+        #idX += 4
+        
         # Read the TLV messages
         for tlvIdx in range(numTLVs):
             
