@@ -139,7 +139,7 @@ def readAndParseData14xx(Dataport, configParameters):
         if startIdx:
             
             # Remove the data before the first start index
-            if startIdx[0] > 0:
+            if startIdx[0] > 0 and startIdx[0] < byteBufferLength:
                 byteBuffer[:byteBufferLength-startIdx[0]] = byteBuffer[startIdx[0]:byteBufferLength]
                 byteBufferLength = byteBufferLength - startIdx[0]
                 
