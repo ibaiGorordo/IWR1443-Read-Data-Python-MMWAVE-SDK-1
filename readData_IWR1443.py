@@ -248,22 +248,13 @@ def readAndParseData14xx(Dataport, configParameters):
                 detObj = {"numObj": tlv_numObj, "rangeIdx": rangeIdx, "range": rangeVal, "dopplerIdx": dopplerIdx, \
                           "doppler": dopplerVal, "peakVal": peakVal, "x": x, "y": y, "z": z}
                 
-                dataOK = 1
-
-                
-                #print(detObj['range'].mean())
-                
-            else:
-                idX += tlv_length
-                
+                dataOK = 1             
         
-                
-        
+  
         # Remove already processed data
         if idX > 0 and byteBufferLength > idX:
-            shiftSize = idX
-            
-                
+            shiftSize = totalPacketLen
+               
             byteBuffer[:byteBufferLength - shiftSize] = byteBuffer[shiftSize:byteBufferLength]
             byteBufferLength = byteBufferLength - shiftSize
             
