@@ -141,6 +141,7 @@ def readAndParseData14xx(Dataport, configParameters):
             # Remove the data before the first start index
             if startIdx[0] > 0 and startIdx[0] < byteBufferLength:
                 byteBuffer[:byteBufferLength-startIdx[0]] = byteBuffer[startIdx[0]:byteBufferLength]
+                byteBuffer[byteBufferLength-startIdx[0]:] = np.zeros(len(byteBuffer[byteBufferLength-startIdx[0]:]),dtype = 'uint8
                 byteBufferLength = byteBufferLength - startIdx[0]
                 
             # Check that there have no errors with the byte buffer length
@@ -256,6 +257,7 @@ def readAndParseData14xx(Dataport, configParameters):
             shiftSize = totalPacketLen
                
             byteBuffer[:byteBufferLength - shiftSize] = byteBuffer[shiftSize:byteBufferLength]
+            byteBuffer[byteBufferLength - shiftSize:] = np.zeros(len(byteBuffer[byteBufferLength - shiftSize:]),dtype = 'uint8')
             byteBufferLength = byteBufferLength - shiftSize
             
             # Check that there are no errors with the buffer length
@@ -278,13 +280,13 @@ def update():
     # Read and parse the received data
     dataOk, frameNumber, detObj = readAndParseData14xx(Dataport, configParameters)
     
-    if dataOk:
+    if dataOk and len(detObj["x"]) > 0:
         #print(detObj)
         x = -detObj["x"]
         y = detObj["y"]
         
-    s.setData(x,y)
-    QtGui.QApplication.processEvents()
+        s.setData(x,y)
+        QtGui.QApplication.processEvents()
     
     return dataOk
 
